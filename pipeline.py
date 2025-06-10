@@ -13,7 +13,7 @@ sys.path.append(os.path.join(BASE, 'pose/analysis/utils'))
 sys.path.append(os.path.join(BASE, 'classification/tsc/utils'))
 from eval_vid import main as main_asses
 
-def run_video_detection(vid, leg):
+def run_video_detection(vid, leg, device='cpu'):
     from analyse_vid_light import start as start_detection
 
     vid_args = Namespace()
@@ -22,7 +22,7 @@ def run_video_detection(vid, leg):
     vid_args.pose_checkpoint = os.path.join(BASE, 'pose/mmpose-files/hrnet_w32_coco_wholebody_256x192_dark-469327ef_20200922.pth')
     vid_args.folder_box = os.path.join(BASE, 'pose/mmdet-files')
     vid_args.show = False
-    vid_args.device = 'cpu'
+    vid_args.device = device
     vid_args.box_thr = 0.1
     vid_args.kpt_thr = 0.1
     vid_args.save_pixels = False
@@ -54,7 +54,7 @@ def assess_subject(datasets, datasets100):
     return main_asses(Namespace(), datasets, datasets100, BASE)
 
 # def pipe(vid, id, leg, attempt, file, debug):
-def pipe(file_path, leg, debug):
+def pipe(file_path, leg, device, debug):
     print(id)
     
     # s3_base = os.path.dirname(vid)
@@ -68,7 +68,7 @@ def pipe(file_path, leg, debug):
         # downloaded = backend_utils.download_from_aws(local_vid_path, vid)
 
         # if downloaded:
-        poses, fps = run_video_detection(local_vid_path, leg)
+        poses, fps = run_video_detection(local_vid_path, leg, device=device)
         # os.remove(local_vid_path)
         print('keypoints found')
         # with open('/data/poses.pkl', 'wb') as fo:

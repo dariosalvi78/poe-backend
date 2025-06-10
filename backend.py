@@ -44,8 +44,9 @@ def analyse_video():
     path = backend_utils.get_variable_from_req(request, 'path')
     leg = backend_utils.get_variable_from_req(request, 'leg')
     debug = backend_utils.get_variable_from_req(request, 'debug')
+    device = backend_utils.get_variable_from_req(request, 'device')
     print(path)
-    status = backend_utils.predict(path, leg, debug=debug)
+    status = backend_utils.predict(path, leg, device=device, debug=debug)
     return f"{path} to be analysed,\n{status}", 200
 
 

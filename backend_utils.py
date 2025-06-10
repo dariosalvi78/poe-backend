@@ -42,6 +42,8 @@ def get_variable_from_req(request, key):
     if var is None:
         print('values')
         var = request.values.get(key)
+    if var == None and key == 'device':
+        var = 'cpu'
 
     return var
 
@@ -91,9 +93,9 @@ def get_result_for_user(id):
     return 0
 
 
-def predict(file_path, leg, debug=None):
+def predict(file_path, leg, device='cpu', debug=None):
     # vid = '/app/dummy-data/950203/ATTEMPT1/vid.mts'
-    job = q.enqueue(pipeline.pipe, args=(file_path, leg, debug),
+    job = q.enqueue(pipeline.pipe, args=(file_path, leg, device, debug),
                     job_timeout=-1)
 
     return (f"Prediction for {file_path} started!\nTask ({job.id})" +
