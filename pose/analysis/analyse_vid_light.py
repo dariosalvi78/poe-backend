@@ -165,6 +165,8 @@ def loop(args, rotate, bbox, rotate_180=False, t0=time.perf_counter(),
     while (cap.isOpened()):
         t1 = time.perf_counter()
         flag, img = cap.read()
+        if img == None:
+            break
         if REDUCE_RATIO > 1:
             img = cv2.resize(img, (int(np.round(img.shape[0] / REDUCE_RATIO)),
                                    int(np.round(img.shape[0] / REDUCE_RATIO))),
