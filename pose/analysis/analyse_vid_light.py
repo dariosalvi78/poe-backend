@@ -165,7 +165,7 @@ def loop(args, rotate, bbox, rotate_180=False, t0=time.perf_counter(),
     while (cap.isOpened()):
         t1 = time.perf_counter()
         flag, img = cap.read()
-        if img == None:
+        if img is None:
             break
         if REDUCE_RATIO > 1:
             img = cv2.resize(img, (int(np.round(img.shape[0] / REDUCE_RATIO)),
@@ -260,7 +260,13 @@ def find_bbox(args, cap):
     print(fps)
 
     print('Frame rate: {} fps'.format(fps))
-    flag, img = cap.read()
+    while (cap.isOpened()):
+        flag, img = cap.read()
+        if img is not None:
+            break
+    if img is None:
+        raise ValueError("VideoCapture does not seem to contain any images when finding bounding box")
+    # flag, img = cap.read()
     if REDUCE_RATIO > 1:
         img = cv2.resize(img, (int(np.round(img.shape[0] / REDUCE_RATIO)),
                               int(np.round(img.shape[0] / REDUCE_RATIO))),
