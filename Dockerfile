@@ -16,9 +16,9 @@ RUN python -c "import mmcv; print(mmcv.__file__)"
 
 ENV PYTHONUNBUFFERED 1
 
-RUN wget https://download.openxlab.org.cn/models/mmdetection/FasterR-CNN/weight/faster-rcnn_r50_fpn_1x_coco -O faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth
+RUN wget https://www.dropbox.com/scl/fi/zmtmdu1eu45brhcmqfy70/faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth?rlkey=qz7vdmb4rk7u6cz8fuguzsvub&dl=0 -O faster_rcnn_r50_fpn_1x_coco_20200130-047c8118.pth
 
-RUN wget https://download.openmmlab.com/mmpose/top_down/hrnet/hrnet_w32_coco_wholebody_256x192_dark-469327ef_20200922.pth -O hrnet_w32_coco_wholebody_256x192_dark-469327ef_20200922.pth
+RUN wget https://www.dropbox.com/scl/fi/ntyhn8jf3uuifhg6144uz/hrnet_w32_coco_wholebody_256x192_dark-469327ef_20200922.pth?rlkey=q8gmntqnt0rw9w0miedub0cgb&dl=0 -O hrnet_w32_coco_wholebody_256x192_dark-469327ef_20200922.pth
 
 
 
